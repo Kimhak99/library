@@ -1,0 +1,75 @@
+var books={};
+var id=1;
+
+var btnSave = document.querySelector(".savebtn");
+
+btnSave.addEventListener("click", () => {
+	//get data from localstorage, and check condition for empty or not
+	books = JSON.parse(localStorage.getItem('booklist')) == null ? books ={} : JSON.parse(localStorage.getItem('booklist'));
+
+	//well it bascially like the name i put, maybe it need the whole thing together to work correctly
+	// console.log("Obj key : " + books[Object.keys(books)]);
+	// console.log("Obj key length : " + books[Object.keys(books)[Object.keys(books).length]]);
+	// console.log("Last item of obj : " + books[Object.keys(books)[Object.keys(books).length - 1]].id);
+
+	saveBook();
+
+	//then this code add books obj to localstorage
+	localStorage.setItem("booklist", JSON.stringify(books));
+});
+
+
+function saveBook(){
+	//get last item of the obj and check for increment
+	id = books[Object.keys(books)[Object.keys(books).length - 1]] != null ? books[Object.keys(books)[Object.keys(books).length - 1]].id +  1 : id++;
+
+	var title= document.getElementById("booktitle").value;
+	var bookauthor= document.getElementById("bookauthor").value;
+	var year= document.getElementById("year").value;
+	var publisher= document.getElementById("publisher").value;
+	var pagenum= document.getElementById("pagenum").value;
+	var copynum= document.getElementById("copynum").value;
+
+	var obj = {
+		"id" : id,
+		"title" : title,
+		"author" : bookauthor,
+		"year" : year,
+		"publisher" : publisher,
+		"pages" : pagenum,
+		"NumberOfCopies" : copynum
+
+	};
+
+	books[obj.title] = obj;
+
+	//if u want to u can shorten this one 
+	// books[title] = {
+	// 	"id" : id,
+	// 	"title" : title,
+	// 	"author" : bookauthor,
+	// 	"year" : year,
+	// 	"publisher" : publisher,
+	// 	"pages" : pagenum,
+	// 	"NumberOfCopies" : copynum
+	// };
+
+	//if u want to u can shorten this one 
+
+
+	/*
+	books.push(obj);
+	if (localStorage.getItem("booklist") === null) {
+    localStorage.setItem("booklist", JSON.stringify(books))
+    */
+
+  //...
+}
+	
+	// localStorage.setItem('booklist', JSON.stringify(books));
+	// books = JSON.parse(localStorage.getItem('books')) || [];
+   
+
+	document.querySelector('form').reset();
+// add data in booktable
+
